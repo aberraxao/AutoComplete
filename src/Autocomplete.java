@@ -1,3 +1,5 @@
+package src;
+
 public class Autocomplete {
    // Initializes the data structure from the given array of terms.
    public Autocomplete(Term[] terms)

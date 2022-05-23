@@ -1,3 +1,5 @@
+package src;
+
 public class BinarySearchDeluxe {
    // Returns the index of the first key in the sorted array a[]
    // that is equal to the search key, or -1 if no such key.
