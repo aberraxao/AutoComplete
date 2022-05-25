@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * Depicts an Autocomplete Term: a string query and respective weight.
+ * Implements an Autocomplete Term: a string query and its respective weight.
  * 
  * @author Diana Amaro
  * @author Diogo Ribeiro
