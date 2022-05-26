@@ -1,12 +1,12 @@
 //* *****************************************************************************
- *  Nome:    
- *  No. de aluno:   
- *  Curso: 
+ *  Nome: Diana Amaro
+ *  No. de aluno: 
+ *  Curso: LEI-PL
  *
  *  Outro(s) integrante(s):
- *  Nome:  N/A 
- *  No. de aluno: N/A  
- *  Curso: N/A
+ *  Nome:  Diogo Ribeiro
+ *  No. de aluno: 103955
+ *  Curso: LEI-PL
  *
  *  Horas para realizar o projeto (opcional):
  *
@@ -33,11 +33,11 @@ Enunciado 2:  Autocomplete
  *  selecione o algoritmo que é utilizado internamente.
  **************************************************************************** */
 
-Autocomplete() :
+Autocomplete() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
 
-allMatches() :
+allMatches() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
 
-numberOfMatches() :
+numberOfMatches() : 
 
 /* *****************************************************************************
  *  Quantas comparações (no pior caso) cada uma das operações do
@@ -49,12 +49,11 @@ numberOfMatches() :
  *  e termos de ordem inferior, por exemplo, Theta(m^2 + m log n).
  **************************************************************************** */
 
-Autocomplete():     Theta(    )
+Autocomplete():     Theta( n log n )
 
-allMatches():       Theta(    )
+allMatches():       Theta( log n + m  )
 
-numberOfMatches():  Theta(    )
-
+numberOfMatches():  Theta(  log n  )
 
 
 
@@ -73,6 +72,17 @@ numberOfMatches():  Theta(    )
  * ter sido utilizados na criação do seu desenho da solução.
  **************************************************************************** */
 
+https://github.com/OxSon/AutoCompleteA03/blob/master/src/
+https://github.com/danny666phantom/autoComplete/blob/master/
+https://github.com/mpaquette18/AutoComplete/blob/master/src/
+https://www.geeksforgeeks.org/
+https://stackoverflow.com/
+
+https://www.interviewkickstart.com/learn/time-complexities-of-all-sorting-algorithms
+https://www.baeldung.com/arrays-sortobject-vs-sortint
+https://www.geeksforgeeks.org/timsort/
+
+https://www.baeldung.com/java-sorting#:~:text=As%20mentioned%20in%20the%20official,algorithm%20for%20Array%20of%20Objects.
 
 * *****************************************************************************
  * Descreva quaisquer problemas graves que tenha encontrado.                    
