@@ -24,6 +24,7 @@ public class Term implements Comparable<Term> {
     * @param weight peso do termo
     */
    public Term(String query, long weight) {
+      // Valida os argumentos
       if (query == null)
          throw new IllegalArgumentException("A consulta não pode ser nula");
       if (weight < 0)
@@ -51,7 +52,7 @@ public class Term implements Comparable<Term> {
     * @return Comparator ordenado por ordem lexicográfica
     */
    public static Comparator<Term> byPrefixOrder(int r) {
-
+      // Valida os argumentos
       if (r < 0)
          throw new IllegalArgumentException("O número de caracteres não pode ser negativo");
 
