@@ -25,18 +25,42 @@ comparator.
 Após validar os argumentos, o método devolve -1 caso o array 'a' não contenha
 elementos.
 Em seguida procede com a aplicação de um algorimto que tem por base o Binary
-Search. Este algoritmo consiste na verificação do valor que se encontra no meio
-de cada subarray de 'a'. Como o array 'a' é ordenado, sabemos que se o elemento
-do meio for maior que a 'key' que estamos à procura, então basta continuar a
-pesquisa na metade esquerda do subarray até encontrar um valor mediano igual à
-'key' ou não ser possível reduzir o tamanho do subarray.
-No caso particular do algoritmo de firstIndexOf(), para além de encontrar a
-'key' no array, temos que verificar se a posição da 'key' no array 'a' é a
-primeira que contém o valor 'key'. Se ao varrermos os elementos à esquerda da
-'key' até encontrarmos um valor menor ou chegarmos à posição 0 e houverem
-outros valores iguais a 'key', o mais à esquerda deve ser considerado como o
-primeiro índice com o valor 'key'.
+Search. Este algoritmo consiste na verificação dos valores
+extremos de subarrays do array orginal 'a' que se tornam menores a cada
+iteração do ciclo while. O critário
+de paragem do Binary Search consiste em encontrar um valor 'mid' igual à key que
+se procura.
 
+
+
+Inicialmente o método faz uma verificação dos input
+      // Valida os argumentos
+      if (a == null || key == null || comparator == null)
+         throw new IllegalArgumentException("Os argumentos não podem ser nulos");
+
+      // O array a[] não possui elementos
+      if (a.length == 0) return -1;
+
+      // Aplica o método da Binary Search
+      int left = 0;
+      int right = a.length - 1;
+      int match = -1;
+      while (left <= right) {
+         int mid = left + (right - left) / 2;
+         int compareResult = comparator.compare(key, a[mid]);
+
+         if (compareResult > 0) // A key procurada é superior à mid key
+            left = mid + 1;
+         else if (compareResult < 0) // A key procurada é inferior à mid key
+            right = mid - 1;
+         else { // A key procurada é igual à mid key
+            match = mid;
+            if (searchFirst) // Verifica se há uma key igual com índice menor
+               right = mid - 1;
+            else // Verifica se há uma key igual com índice maior
+               left = mid + 1;
+         }
+      }
 
 /* *****************************************************************************
  *  Identificar qual algoritmo de ordenação (se houver) o seu programa utiliza no
@@ -48,7 +72,7 @@ primeiro índice com o valor 'key'.
  *  Se estiver a utilizar uma implementação optimizada, tal como Arrays.sort(),
  *  selecione o algoritmo que é utilizado internamente.
  **************************************************************************** */
-TODO
+
 Autocomplete() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
 
 allMatches() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
@@ -78,9 +102,7 @@ numberOfMatches():  Theta(  log n  )
  **************************************************************************** */
 
 Os testes unitários funcionam apenas com ficheiros que se encontrem no mesmo
-formato que 'cities.txt' e 'wiktionary.txt'. Caso o ficheiro não seja
-especificado nos argumentos, um dos ficheiros de exemplo é utilizado.
-No entanto, não é feita a verificação da existência destes ficheiros.
+formato que cities.txt e wiktionary.txt.
 
 
 /* *****************************************************************************
@@ -124,8 +146,5 @@ O trabalho foi elaborado e revisto por ambas as partes conforme o protocolo.
  * feedback sobre o quanto aprendeu ao fazer o projeto, e se
  * gostou de o fazer.
  **************************************************************************** */
-
-Achámos o tópico da pesquisa do Google muito interessante por diferir dos
-exemplos apresentados nas aulas. Estes algoritmos foram revolucionários na época
-em que foram implementados e atualmente continuam a ser bastante utilizados
-desde a pesquisa de informação até à inteligência artificial.
+TODO melhorar
+Achámos o tópico da pesquisa do Google muito interessante.
