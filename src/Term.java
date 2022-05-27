@@ -72,7 +72,7 @@ public class Term implements Comparable<Term> {
     * Compara dois termos por ordem lexicográfica por string de consulta
     * (ordem natural)
     *
-    * @return o valor do termo this em comparação com o termo that:
+    * @return Valor do termo this em comparação com o termo that:
     * negativo se this menor, zero se iguais, positivo se this maior
     */
    public int compareTo(Term that) {
