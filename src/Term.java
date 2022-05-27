@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * Implementa a classe Term com a String query (consulta) e o respetivo long weight (peso).
+ * Implementa a classe Term com a query (consulta) e o respetivo weight (peso).
  *
  * @author Diana Amaro
  * @author Diogo Ribeiro
@@ -24,8 +24,10 @@ public class Term implements Comparable<Term> {
     * @param weight peso do termo
     */
    public Term(String query, long weight) {
-      if (query == null) throw new IllegalArgumentException("A consulta não pode ser nula");
-      if (weight < 0) throw new IllegalArgumentException("O peso não pode ser negativo");
+      if (query == null)
+         throw new IllegalArgumentException("A consulta não pode ser nula");
+      if (weight < 0)
+         throw new IllegalArgumentException("O peso não pode ser negativo");
 
       this.query = query;
       this.weight = weight;
@@ -37,35 +39,41 @@ public class Term implements Comparable<Term> {
     * @return Comparator ordenado por ordem de peso descendente
     */
    public static Comparator<Term> byReverseWeightOrder() {
-      return (thisTerm, thatTerm) -> Long.compare(thatTerm.weight, thisTerm.weight);
+      return (thisTerm, thatTerm) ->
+          Long.compare(thatTerm.weight, thisTerm.weight);
    }
 
    /**
-    * Compara dois termos por ordem lexicográfica por string de consulta (ordem natural), comparando apenas os seus
-    * primeiros 'r' caracteres.
+    * Compara dois termos por ordem lexicográfica por string de consulta
+    * (ordem natural), comparando apenas os seus primeiros 'r' caracteres.
     *
     * @param r número de caracteres a comparar
     * @return Comparator ordenado por ordem lexicográfica
     */
    public static Comparator<Term> byPrefixOrder(int r) {
 
-      if (r < 0) throw new IllegalArgumentException("O número de caracteres não pode ser negativo");
+      if (r < 0)
+         throw new IllegalArgumentException("O número de caracteres não pode ser negativo");
 
       return (thisTerm, thatTerm) -> {
 
-         // Se o comprimento da consulta for superior ao número de caracteres, considera apenas os primeiros r
-         String thisQuery = thisTerm.query.length() < r ? thisTerm.query : thisTerm.query.substring(0, r);
-         String thatQuery = thatTerm.query.length() < r ? thatTerm.query : thatTerm.query.substring(0, r);
+         // Se o comprimento da consulta for superior ao número de caracteres,
+         // considera apenas os primeiros r
+         String thisQuery = thisTerm.query.length() < r
+             ? thisTerm.query : thisTerm.query.substring(0, r);
+         String thatQuery = thatTerm.query.length() < r
+             ? thatTerm.query : thatTerm.query.substring(0, r);
 
          return thisQuery.compareTo(thatQuery);
       };
    }
 
    /**
-    * Compara dois termos por ordem lexicográfica por string de consulta (ordem natural)
+    * Compara dois termos por ordem lexicográfica por string de consulta
+    * (ordem natural)
     *
-    * @return o valor do termo this em comparação com o termo that: negativo se this menor, zero se iguais,
-    * positivo se this maior
+    * @return o valor do termo this em comparação com o termo that:
+    * negativo se this menor, zero se iguais, positivo se this maior
     */
    public int compareTo(Term that) {
       return this.query.compareTo(that.query);
@@ -102,7 +110,7 @@ public class Term implements Comparable<Term> {
       }
       StdOut.println("FIM: Testes das exceções do construtor\n");
 
-      // Lê os termos do ficheiro recebido em args[0] para prosseguir com os testes
+      // Lê os termos do ficheiro recebido em args[0]
       String filename = args[0];
       In in = new In(filename);
       int n = in.readInt();
@@ -120,11 +128,17 @@ public class Term implements Comparable<Term> {
 
       StdOut.println("INÍCIO: Testa compareTo");
       StdOut.printf("Comparação '%s' vs '%s' = %d\n",
-          terms[0].query, terms[1].query, terms[0].query.compareTo(terms[1].query));
+          terms[0].query,
+          terms[1].query,
+          terms[0].query.compareTo(terms[1].query));
       StdOut.printf("Comparação '%s' vs '%s' = %d\n",
-          terms[0].query, terms[0].query, terms[0].query.compareTo(terms[0].query));
+          terms[0].query,
+          terms[0].query,
+          terms[0].query.compareTo(terms[0].query));
       StdOut.printf("Comparação '%s' vs '%s' = %d\n",
-          terms[1].query, terms[0].query, terms[1].query.compareTo(terms[0].query));
+          terms[1].query,
+          terms[0].query,
+          terms[1].query.compareTo(terms[0].query));
       StdOut.println("FIM: Testa compareTo\n");
 
       StdOut.println("INÍCIO: Testa byPrefixOrder");
