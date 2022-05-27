@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author Diogo Ribeiro
  */
 public class Autocomplete {
-   private Term[] terms;
+   private final Term[] terms;
 
    /**
     * Inicializa a estrutura de dados a partir de um arrays de Termos
@@ -57,7 +57,7 @@ public class Autocomplete {
 
       // Obtém o último índice
       int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-      int nbMatches = lastIndex - firstIndex;
+      int nbMatches = lastIndex - firstIndex + 1;
 
       // Preenche of vetor das igualdades com os termos encontrados
       matches = new Term[nbMatches];
@@ -79,14 +79,19 @@ public class Autocomplete {
     */
    public int numberOfMatches(String prefix) {
       // Valida os argumentos
-      if (prefix == null) throw new IllegalArgumentException("O prefixo não pode ser nulo");
+      if (prefix == null)
+         throw new IllegalArgumentException("O prefixo não pode ser nulo");
 
       Term termToMatch = new Term(prefix, 0);
 
       int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
       int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
 
-      return lastIndex - firstIndex + 1;
+      // firstIndex e lastIndex retornam -1 em caso de não encontrar o termo
+      if (firstIndex == -1)
+         return 0;
+      else
+         return lastIndex - firstIndex + 1;
    }
 
    /**
@@ -139,7 +144,7 @@ public class Autocomplete {
       StdOut.println("FIM: Testa AutoComplete\n");
 
       StdOut.println("INÍCIO: Testa allMatches");
-      String prefix = "Lis";
+      String prefix = "Lisbon";
       Term[] matches = test.allMatches(prefix);
       for (int i = 0; i < matches.length; i++)
          StdOut.printf("%s\n", matches[i].toString());
