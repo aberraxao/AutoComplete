@@ -94,7 +94,7 @@ public class BinarySearchDeluxe {
       StdOut.println("Inicia um conjunto de testes do módulo BinarySearchDeluxe...\n");
 
       Term[] testTerms = new Term[8];
-      Term testTerm = new Term("Lisboa, Portugal", 3);
+      Term testTerm = new Term("Lisboa", 3);
       StdOut.println("INÍCIO: Testes das exceções de binarySearch");
       // As exceções de firstIndexOf e lastIndexOf são as mesmas, pois ambas
       // utilizam o mesmo método binarySearch
@@ -115,9 +115,14 @@ public class BinarySearchDeluxe {
       }
       StdOut.println("FIM: Testes das exceções de binarySearch\n");
 
-      // Lê os termos do ficheiro recebido em args[0]
-      String filename = args[0];
-      In in = new In(filename);
+      // Lê os termos do ficheiro recebido em args[0] ou de "wiktionary.txt"
+      String fileName;
+      if (args.length == 0)
+         fileName = "wiktionary.txt";
+      else
+         fileName = args[0];
+      // Processa o ficheiro
+      In in = new In(fileName);
       int n = in.readInt();
       Term[] terms = new Term[n];
       for (int i = 0; i < n; i++) {
@@ -131,21 +136,21 @@ public class BinarySearchDeluxe {
       Arrays.sort(terms, Term.byPrefixOrder(4));
       StdOut.printf("Primeiro índice de %s não encontrado: %d\n",
           testTerm.toString(),
-          firstIndexOf(terms, testTerm, Term.byPrefixOrder(200)));
+          firstIndexOf(terms, testTerm, Term.byPrefixOrder(20)));
       StdOut.printf("Último índice de %s não encontrado: %d\n",
           testTerm.toString(),
-          lastIndexOf(terms, testTerm, Term.byPrefixOrder(200)));
+          lastIndexOf(terms, testTerm, Term.byPrefixOrder(20)));
       StdOut.println("FIM: Testa índices não encontrados\n");
 
       StdOut.println("INÍCIO: Testa encontrar índices");
-      testTerm = new Term("A Coruña, Spain", 246056);
+      testTerm = new Term("no", 1);
       Arrays.sort(terms, Term.byPrefixOrder(4));
-      StdOut.printf("Primeiro índice de %s encontrado: %d\n",
+      StdOut.printf("Primeiro índice de '%s' encontrado: %d\n",
           testTerm.toString(),
-          firstIndexOf(terms, testTerm, Term.byPrefixOrder(200)));
-      StdOut.printf("Último índice de %s encontrado: %d\n",
+          firstIndexOf(terms, testTerm, Term.byPrefixOrder(2)));
+      StdOut.printf("Último índice de '%s' encontrado: %d\n",
           testTerm.toString(),
-          lastIndexOf(terms, testTerm, Term.byPrefixOrder(200)));
+          lastIndexOf(terms, testTerm, Term.byPrefixOrder(2)));
       StdOut.println("FIM: Testa encontrar índices\n");
    }
 }

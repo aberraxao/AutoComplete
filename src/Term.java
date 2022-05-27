@@ -110,9 +110,14 @@ public class Term implements Comparable<Term> {
       }
       StdOut.println("FIM: Testes das exceções do construtor\n");
 
-      // Lê os termos do ficheiro recebido em args[0]
-      String filename = args[0];
-      In in = new In(filename);
+      // Lê os termos do ficheiro recebido em args[0] ou de "cities.txt"
+      String fileName;
+      if (args.length == 0)
+         fileName = "cities.txt";
+      else
+         fileName = args[0];
+      // Processa o ficheiro
+      In in = new In(fileName);
       int n = in.readInt();
       Term[] terms = new Term[n];
       for (int i = 0; i < n; i++) {
