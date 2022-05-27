@@ -14,8 +14,8 @@ import java.util.Comparator;
  */
 public class Term implements Comparable<Term> {
 
-   private String query;
-   private long weight;
+   private final String query;
+   private final long weight;
 
    /**
     * Inicializa o Term com a respetiva query e weight.
@@ -91,12 +91,12 @@ public class Term implements Comparable<Term> {
 
       StdOut.println("INÍCIO: Testes das exceções do construtor");
       try {
-         Term terms = new Term(null, 15);
+         new Term(null, 15);
       } catch (IllegalArgumentException e) {
          StdOut.println("Exceção da consulta testada");
       }
       try {
-         Term terms = new Term("Tokyo, City", -1);
+         new Term("Tokyo, City", -1);
       } catch (IllegalArgumentException e) {
          StdOut.println("Exceção do peso testada");
       }
@@ -129,7 +129,7 @@ public class Term implements Comparable<Term> {
 
       StdOut.println("INÍCIO: Testa byPrefixOrder");
       try {
-         byPrefixOrder(-5);
+         Arrays.sort(terms, byPrefixOrder(-5));
       } catch (IllegalArgumentException e) {
          StdOut.println("Exceção do comprimento testada");
       }
