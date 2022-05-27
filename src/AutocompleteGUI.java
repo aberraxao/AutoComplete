@@ -36,6 +36,8 @@
  *
  **************************************************************************** */
 
+package src;
+
 import edu.princeton.cs.algs4.In;
 
 import javax.swing.AbstractAction;
