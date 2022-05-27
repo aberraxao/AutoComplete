@@ -48,12 +48,12 @@ primeiro índice com o valor 'key'.
  *  Se estiver a utilizar uma implementação optimizada, tal como Arrays.sort(),
  *  selecione o algoritmo que é utilizado internamente.
  **************************************************************************** */
-TODO
+
 Autocomplete() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
 
 allMatches() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
 
-numberOfMatches() : 
+numberOfMatches() : none
 
 /* *****************************************************************************
  *  Quantas comparações (no pior caso) cada uma das operações do
@@ -64,7 +64,7 @@ numberOfMatches() :
  *  Recorde que com a notação Big Theta, deve descartar coeficientes
  *  e termos de ordem inferior, por exemplo, Theta(m^2 + m log n).
  **************************************************************************** */
-TODO
+
 Autocomplete():     Theta( n log n )
 
 allMatches():       Theta( log n + m  )
