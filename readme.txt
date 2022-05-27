@@ -92,16 +92,22 @@ No entanto, não é feita a verificação da existência destes ficheiros.
  * Incluir também quaisquer recursos (incluindo a web) que possa
  * ter sido utilizados na criação do seu desenho da solução.
  **************************************************************************** */
-TODO Formatar
-https://github.com/OxSon/AutoCompleteA03
-https://github.com/danny666phantom/autoComplete
-https://github.com/mpaquette18/AutoComplete
 
-https://www.interviewkickstart.com/learn/time-complexities-of-all-sorting-algorithms
-https://www.geeksforgeeks.org/timsort/
-https://www.geeksforgeeks.org/find-first-and-last-positions-of-an-element-in-a-sorted-array/
+* Time Comparison of Arrays.sort(Object[]) and Arrays.sort(int[]) (2022).
+Consultado em 27 maio 2022. Disponível em
 https://www.baeldung.com/arrays-sortobject-vs-sortint
-https://www.baeldung.com/java-sorting
+* Sorting in Java. (2022). Consultado em 23 maio 2022.
+Disponível em https://www.baeldung.com/java-sorting
+* Class Arrays. (2022). Consultado em 23 maio 2022.
+Disponível em https://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html
+* Find first and last positions of an element in a sorted array. (2022).
+Consultado em 26 maio 2022. Disponível em
+https://www.geeksforgeeks.org/find-first-and-last-positions-of-an-element-in-a-sorted-array
+* Time and Space Complexities of Sorting Algorithms Explained. (2022).
+Consultado em 27 maio 2022. Disponível em
+https://www.interviewkickstart.com/learn/time-complexities-of-all-sorting-algorithms
+* autoComplete. (2022). Consultado em 27 maio 2022.
+Disponível em https://github.com/danny666phantom/autoComplete
 
 /* *****************************************************************************
  * Descreva quaisquer problemas graves que tenha encontrado.                    
