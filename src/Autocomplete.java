@@ -22,11 +22,12 @@ public class Autocomplete {
     */
    public Autocomplete(Term[] terms) {
       // Valida os argumentos
-      if (terms == null) throw new IllegalArgumentException("O vetor de termos não pode ser nulo");
+      if (terms == null)
+         throw new IllegalArgumentException("O vetor de termos não pode ser nulo");
 
       this.terms = terms;
 
-      // order lexicographically
+      // Ordena o array lexicograficamente
       Arrays.sort(this.terms);
    }
 
@@ -45,30 +46,26 @@ public class Autocomplete {
       Term[] matches;
       Term termToMatch = new Term(prefix, 0);
 
-      // gets first and last index
+      // Obtém o primeiro índice
       int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-      int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-      int length = lastIndex - firstIndex + 1;
-
-      // checks if no results were found and returns a single "No results found" term
-      if (firstIndex == -1 || lastIndex == -1) {
+      // Se o primeiro índice for -1, então não foram encontrados resultados
+      if (firstIndex == -1) {
          matches = new Term[1];
-         matches[0] = new Term("No results found", 0);
+         matches[0] = new Term("Não foram encontrados resultados", 0);
          return matches;
       }
 
-      // check if first index is equal or bigger than last index
-      if (firstIndex <= lastIndex) matches = new Term[length];
-      else matches = new Term[0];
+      // Obtém o último índice
+      int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
+      int nbMatches = lastIndex - firstIndex;
 
-      // get all terms between first and last index
-      if (matches.length != 0) {
-         for (int i = 0; i < length; i++) {
-            matches[i] = terms[firstIndex + i];
-         }
+      // Preenche of vetor das igualdades com os termos encontrados
+      matches = new Term[nbMatches];
+      for (int i = 0; i < nbMatches; i++) {
+         matches[i] = terms[firstIndex + i];
       }
 
-      // sorts matches by reverse weight order
+      // Ordena o array por ordem descendente de peso
       Arrays.sort(matches, Term.byReverseWeightOrder());
 
       return matches;
