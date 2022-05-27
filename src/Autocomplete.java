@@ -85,13 +85,14 @@ public class Autocomplete {
       Term termToMatch = new Term(prefix, 0);
 
       int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-      int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
 
-      // firstIndex e lastIndex retornam -1 em caso de não encontrar o termo
+      // firstIndex retorna -1 em caso de não encontrar o termo
       if (firstIndex == -1)
          return 0;
-      else
+      else{
+         int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
          return lastIndex - firstIndex + 1;
+      }
    }
 
    /**

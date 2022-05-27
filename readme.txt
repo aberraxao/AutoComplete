@@ -49,11 +49,14 @@ primeiro índice com o valor 'key'.
  *  selecione o algoritmo que é utilizado internamente.
  **************************************************************************** */
 
-Autocomplete() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
+Autocomplete() : insertion sort e merge sort (algoritmo utilizado pelo
+                 Arrays.sort() para Objects - TimSort)
 
-allMatches() : insertionsort e mergesort (algoritmo utilizado pelo Arrays.sort() para Objects - TimSort)
+allMatches() : insertion sort e merge sort (algoritmo utilizado pelo Arrays.sort()
+               para Objects - TimSort)
 
-numberOfMatches() : none
+numberOfMatches() : binary search
+
 
 /* *****************************************************************************
  *  Quantas comparações (no pior caso) cada uma das operações do
@@ -67,10 +70,9 @@ numberOfMatches() : none
 
 Autocomplete():     Theta( n log n )
 
-allMatches():       Theta( log n + m  )
+allMatches():       Theta( log n + m log m )
 
-numberOfMatches():  Theta(  log n  )
-
+numberOfMatches():  Theta( log n )
 
 
 /* *****************************************************************************
@@ -93,21 +95,17 @@ No entanto, não é feita a verificação da existência destes ficheiros.
  * ter sido utilizados na criação do seu desenho da solução.
  **************************************************************************** */
 
-* Time Comparison of Arrays.sort(Object[]) and Arrays.sort(int[]) (2022).
+* What Is the Time Complexity of Arrays.sort() and Collections.sort() (2022).
 Consultado em 27 maio 2022. Disponível em
-https://www.baeldung.com/arrays-sortobject-vs-sortint
+https://www.gregorygaines.com/blog/what-is-the-time-complexity-arrays-and-collections-sort/
 * Sorting in Java. (2022). Consultado em 23 maio 2022.
 Disponível em https://www.baeldung.com/java-sorting
-* Class Arrays. (2022). Consultado em 23 maio 2022.
-Disponível em https://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html
 * Find first and last positions of an element in a sorted array. (2022).
 Consultado em 26 maio 2022. Disponível em
 https://www.geeksforgeeks.org/find-first-and-last-positions-of-an-element-in-a-sorted-array
-* Time and Space Complexities of Sorting Algorithms Explained. (2022).
-Consultado em 27 maio 2022. Disponível em
-https://www.interviewkickstart.com/learn/time-complexities-of-all-sorting-algorithms
 * autoComplete. (2022). Consultado em 27 maio 2022.
 Disponível em https://github.com/danny666phantom/autoComplete
+
 
 /* *****************************************************************************
  * Descreva quaisquer problemas graves que tenha encontrado.                    
