@@ -1,149 +1,158 @@
 package src;
 
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Arrays;
 
 /**
- * Implements data type with autocomplete functionality for a given set of strings and weights. 
- * 
+ * Implementa um tipo de dados que fornece a funcionalidade de preenchimento
+ * automático para um determinado conjunto de strings e pesos.
+ *
  * @author Diana Amaro
  * @author Diogo Ribeiro
  */
-public class Autocomplete
-{
-    private Term[] terms;
-	
-	/**
-	 * Initializes the data structure from the given array of terms.
-	 * 
-	 * @param terms	array of terms to use
-	 */
-	public Autocomplete(Term[] terms)
-	{
-		// arguments validation
-        if (terms == null)
-            throw new NullPointerException("Argument cannot be null");
+public class Autocomplete {
+   private final Term[] terms;
 
-        this.terms = terms;
+   /**
+    * Inicializa a estrutura de dados a partir de um arrays de Termos
+    *
+    * @param terms array de Termos
+    */
+   public Autocomplete(Term[] terms) {
+      // Valida os argumentos
+      if (terms == null)
+         throw new IllegalArgumentException("O vetor de termos não pode ser nulo");
 
-		// order lexicographically
-        Arrays.sort(this.terms);
-	}
+      this.terms = terms;
 
+      // Ordena o array lexicograficamente
+      Arrays.sort(this.terms);
+   }
 
-	/**
-	 * Returns all terms that start with the given prefix, in descending order of weight .
-	 * 
-	 * @param prefix	prefix to be searched
-	 * @return	array of terms that start with the given prefix, in descending order of weight
-	 */
-	public Term[] allMatches(String prefix)
-	{
-		// arguments validation
-		if(prefix == null)
-			throw new IllegalArgumentException("Argument cannot be null");
-		
-		Term[] matches;
-		Term termToMatch = new Term(prefix, 0);
-		
-		// gets first and last index
-		int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-		int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-		int length = lastIndex - firstIndex + 1;
-		
-		// checks if no results were found and returns a single "No results found" term
-		if( firstIndex == -1 || lastIndex == -1 )
-		{
-			matches = new Term[1];
-			matches[0] = new Term("No results found", 0);
-			return matches;
-		}
-		
-		// check if first index is equal or bigger than last index
-		if( firstIndex <= lastIndex )
-			matches = new Term[length];
-		else
-			matches = new Term[0];
+   /**
+    * Retorna por ordem decrescente de peso todos os termos que começam com um
+    * determinado prefixo
+    *
+    * @param prefix prefixo dos termos
+    * @return array de Termos ordenados por ordem decrescente de peso e que
+    * começam com um determinado prefixo
+    */
+   public Term[] allMatches(String prefix) {
+      // Valida os argumentos
+      if (prefix == null) throw new IllegalArgumentException("O prefixo não pode ser nulo");
 
-		// get all terms between first and last index
-		if(matches.length != 0)
-		{
-			for(int i = 0; i < length; i++)
-			{
-				matches[i] = terms[firstIndex + i];
-			}
-		}
+      Term[] matches;
+      Term termToMatch = new Term(prefix, 0);
 
-		// sorts matches by reverse weight order
-		Arrays.sort(matches, Term.byReverseWeightOrder());
-		
-		return matches;
-	}
+      // Obtém o primeiro índice
+      int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
+      // Se o primeiro índice for -1, então não foram encontrados resultados
+      if (firstIndex == -1) {
+         matches = new Term[1];
+         matches[0] = new Term("Não foram encontrados resultados", 0);
+         return matches;
+      }
 
-	/**
-	 * Returns the number of terms that start with the given prefix.
-	 * 
-	 * @param prefix	prefix to be searched
-	 * @return	number of terms that start with the given prefix
-	 */
-	public int numberOfMatches(String prefix)
-	{
-        Term termToMatch = new Term(prefix, 0);
-        
-        int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-		int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
-		
-        return lastIndex - firstIndex + 1;
-	}
+      // Obtém o último índice
+      int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
+      int nbMatches = lastIndex - firstIndex + 1;
 
-	/**
-	 * unit testing (required)
-	 * 
-	 */
-	public static void main(String[] args)
-	{
-		// Initialize several test Terms
-		System.out.println("Initialize Terms - START");
-		Term[] terms = new Term[8];
-		terms[0] = new Term("Seoul, South Korea", 12345);
-		terms[1] = new Term("Buenos Aires, Argentina", 13076300);
-		terms[2] = new Term("Buenos Aires, Argentina", 456789);
-		terms[3] = new Term("Mumbai, India", 12691836);
-		terms[4] = new Term("Jakarta, Indonesia", 8540121);
-		terms[5] = new Term("Jakarta, Indonesia", 7895465);
-		terms[6] = new Term("Jakarta, Indonesia", 1234506);
-		terms[7] = new Term("Seoul, South Korea", 10349312);
-		System.out.println("Initialize Terms - END");
-		System.out.println();
-		
-		// Initialize prefix
-//		String prefix = "Seoul, South Korea";
-		String prefix = "Jakarta, Indonesia";
-//		String prefix = "Buenos Aires, Argentina";
-//		String prefix = "Mumbai, India";
-//		String prefix = "Lisboa, Portugal";
-		
-		// Test Constructor
-		System.out.println("Test Constructor - START");
-		Autocomplete test = new Autocomplete(terms);
-        for (int i = 0; i < test.terms.length; i++)
-        	System.out.println(test.terms[i]);
-		System.out.println("Test Constructor - END");
-		System.out.println();
-		
-		// Test allMatches
-		System.out.println("Test allMatches - START");
-		Term[] matches = test.allMatches(prefix);
-		for (int i = 0; i < matches.length; i++)
-			System.out.println(matches[i]);
-		System.out.println("Test allMatches - END");
-		System.out.println();
-		
-		// Test numberOfMatches
-		System.out.println("Test numberOfMatches - START");
-		int nrMatches = test.numberOfMatches(prefix);
-		System.out.println("numberOfMatches: " + nrMatches);
-		System.out.println("Test numberOfMatches - END");
-		System.out.println();
+      // Preenche of vetor das igualdades com os termos encontrados
+      matches = new Term[nbMatches];
+      for (int i = 0; i < nbMatches; i++) {
+         matches[i] = terms[firstIndex + i];
+      }
 
-	}
+      // Ordena o array por ordem descendente de peso
+      Arrays.sort(matches, Term.byReverseWeightOrder());
+
+      return matches;
+   }
+
+   /**
+    * Retorna o número de termos que começam com o determinado prefixo
+    *
+    * @param prefix prefixo dos termos
+    * @return número de termos que começam com o determinado prefixo
+    */
+   public int numberOfMatches(String prefix) {
+      // Valida os argumentos
+      if (prefix == null)
+         throw new IllegalArgumentException("O prefixo não pode ser nulo");
+
+      Term termToMatch = new Term(prefix, 0);
+
+      int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
+      int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, termToMatch, Term.byPrefixOrder(prefix.length()));
+
+      // firstIndex e lastIndex retornam -1 em caso de não encontrar o termo
+      if (firstIndex == -1)
+         return 0;
+      else
+         return lastIndex - firstIndex + 1;
+   }
+
+   /**
+    * Testes unitários
+    *
+    * @param args Nome do ficheiro de entrada
+    */
+   public static void main(String[] args) {
+      StdOut.println("Inicia um conjunto de testes do módulo AutoComplete...\n");
+
+      // Lê os termos do ficheiro recebido em args[0] ou de "cities.txt"
+      String fileName;
+      if (args.length == 0) fileName = "cities.txt";
+      else fileName = args[0];
+      // Processa o ficheiro
+      In in = new In(fileName);
+      int n = in.readInt();
+      Term[] terms = new Term[n];
+      for (int i = 0; i < n; i++) {
+         long weight = in.readLong();           // lê o próximo peso
+         in.readChar();                         // lê a tab
+         String query = in.readLine();          // lê a próxima consulta
+         terms[i] = new Term(query, weight);    // contrói o termo
+      }
+
+      StdOut.println("INÍCIO: Testes das exceções de AutoComplete");
+      try {
+         new Autocomplete(null);
+      } catch (IllegalArgumentException e) {
+         StdOut.println("Exceção de Autocomplete");
+      }
+      Autocomplete test = new Autocomplete(terms);
+      try {
+         test.allMatches(null);
+      } catch (IllegalArgumentException e) {
+         StdOut.println("Exceção de allMatches");
+      }
+      try {
+         test.numberOfMatches(null);
+      } catch (IllegalArgumentException e) {
+         StdOut.println("Exceção de numberOfMatches");
+      }
+      StdOut.println("FIM: Testes das exceções de AutoComplete\n");
+
+      StdOut.println("INÍCIO: Testa AutoComplete");
+      StdOut.println("Imprime os primeiros 10 termos se existirem.");
+      test = new Autocomplete(terms);
+      for (int i = 0; i < terms.length && i < 10; i++)
+         StdOut.printf("%s\n", test.terms[i].toString());
+      StdOut.println("FIM: Testa AutoComplete\n");
+
+      StdOut.println("INÍCIO: Testa allMatches");
+      String prefix = "Lisbon";
+      Term[] matches = test.allMatches(prefix);
+      for (int i = 0; i < matches.length; i++)
+         StdOut.printf("%s\n", matches[i].toString());
+      StdOut.println("FIM: Testa allMatches\n");
+
+      StdOut.println("INÍCIO: Testa numberOfMatches");
+      int nrMatches = test.numberOfMatches(prefix);
+      StdOut.printf("Número de termos que começam por '%s': %d\n", prefix, nrMatches);
+      StdOut.println("FIM: Testa numberOfMatches\n");
+   }
 }

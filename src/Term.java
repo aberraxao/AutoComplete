@@ -24,6 +24,7 @@ public class Term implements Comparable<Term> {
     * @param weight peso do termo
     */
    public Term(String query, long weight) {
+      // Valida os argumentos
       if (query == null)
          throw new IllegalArgumentException("A consulta não pode ser nula");
       if (weight < 0)
@@ -51,7 +52,7 @@ public class Term implements Comparable<Term> {
     * @return Comparator ordenado por ordem lexicográfica
     */
    public static Comparator<Term> byPrefixOrder(int r) {
-
+      // Valida os argumentos
       if (r < 0)
          throw new IllegalArgumentException("O número de caracteres não pode ser negativo");
 
@@ -110,9 +111,14 @@ public class Term implements Comparable<Term> {
       }
       StdOut.println("FIM: Testes das exceções do construtor\n");
 
-      // Lê os termos do ficheiro recebido em args[0]
-      String filename = args[0];
-      In in = new In(filename);
+      // Lê os termos do ficheiro recebido em args[0] ou de "cities.txt"
+      String fileName;
+      if (args.length == 0)
+         fileName = "cities.txt";
+      else
+         fileName = args[0];
+      // Processa o ficheiro
+      In in = new In(fileName);
       int n = in.readInt();
       Term[] terms = new Term[n];
       for (int i = 0; i < n; i++) {
